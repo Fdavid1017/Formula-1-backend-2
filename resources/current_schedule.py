@@ -11,7 +11,6 @@ class CurrentSchedule(Resource):
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
         self.reqparse.add_argument('expand-circuit', type=bool, default=False)
-        self.reqparse.add_argument('expand-circuit-image', type=bool, default=False)
         self.reqparse.add_argument('expand-circuit-map', type=bool, default=False)
 
     def get(self):
@@ -20,7 +19,6 @@ class CurrentSchedule(Resource):
         try:
             expand = {
                 'infos': args['expand-circuit'],
-                'image': args['expand-circuit-image'],
                 'map': args['expand-circuit-map']
             }
             return jsonify(get_current_schedule(expand))

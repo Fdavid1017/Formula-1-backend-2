@@ -1,4 +1,5 @@
 import os
+from pprint import pprint
 
 import fastf1 as ff1
 from fastf1 import plotting
@@ -6,14 +7,20 @@ from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
 
+from resources.all_team_color import AllTeamColor
 from resources.car_image import CarImage
 from resources.circuit_image import CircuitImage
+from resources.circuit_infos import CircuitInfos
 from resources.constructors_standing import ConstructorsStanding
 from resources.current_schedule import CurrentSchedule
 from resources.driver_image import DriverImage
 from resources.drivers_standing import DriversStanding
+from resources.fastest_compound import FastestCompound
 from resources.gearshifts_on_lap import GearShiftsOnLap
+from resources.get_tweets import GetTweets
 from resources.session_results import SessionResults
+from resources.speed_on_lap import SpeedOnLap
+from resources.team_color import TeamColor
 from resources.upcoming_race import UpcomingRace
 
 plotting.setup_mpl()
@@ -40,13 +47,22 @@ api.add_resource(CarImage, '/api/car-image/<image_name>', endpoint="car-image")
 api.add_resource(UpcomingRace, '/api/upcoming-race', endpoint="upcoming-race")
 api.add_resource(ConstructorsStanding, '/api/constructors-standing', endpoint="constructors-standing")
 api.add_resource(DriversStanding, '/api/drivers-standing', endpoint="drivers-standing")
-api.add_resource(SessionResults, '/api/session-results/<gp>/<session>', defaults={'year': '2021'},
-                 endpoint="session-results-without-year")
 api.add_resource(SessionResults, '/api/session-results/<gp>/<session>/<year>', endpoint="session-results-with-year")
-api.add_resource(GearShiftsOnLap, '/api/gear-shifts-in-lap/<lap>/<driver>/<gp>/<session>/<year>',
-                 endpoint="gear-shits-in-lap-with-year")
-api.add_resource(GearShiftsOnLap, '/api/gear-shifts-in-lap/<lap>/<driver>/<gp>/<session>', defaults={'year': '2021'},
-                 endpoint="gear-shits-in-lap-without-year")
+api.add_resource(GearShiftsOnLap, '/api/gear-shifts-on-lap/<lap>/<driver>/<gp>/<session>/<year>',
+                 endpoint="gear-shits-on-lap")
+api.add_resource(SpeedOnLap, '/api/speed-on-lap/<lap>/<driver>/<gp>/<session>/<year>',
+                 endpoint="speed-on-lap")
+api.add_resource(GetTweets, '/api/get-tweets',
+                 endpoint="get-tweets")
+api.add_resource(TeamColor, '/api/team-colors/<team_id>', endpoint="team-color")
+api.add_resource(AllTeamColor, '/api/team-colors', endpoint="all-team-color")
+api.add_resource(CircuitInfos, '/api/circuit/<circuit_id>', endpoint="circuit-infos")
+api.add_resource(FastestCompound, '/api/fastest-compound/<lap>/<gp>/<session>/<year>', endpoint="fastest-compound")
 
 if __name__ == "__main__":
+    race = ff1.get_session(2021, 'Abu Dhabi', 'R')
+    laps = race.load_laps(with_telemetry=True)
+
+    pprint(laps['Compound'].value_counts())
+
     app.run(debug=True)

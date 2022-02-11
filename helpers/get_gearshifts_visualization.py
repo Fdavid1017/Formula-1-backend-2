@@ -1,5 +1,4 @@
 import io
-from pprint import pprint
 
 import fastf1
 import matplotlib.pyplot as plt
@@ -13,9 +12,7 @@ def get_gearshifts_visualization(gp, session, year, lap, driver):
     laps = session.load_laps(with_telemetry=True)
     driver_laps = laps.pick_driver(driver)
 
-    lap = driver_laps.loc[driver_laps['LapNumber'] == lap]
-
-    pprint(lap)
+    lap = driver_laps.loc[driver_laps['LapNumber'] == int(lap)]
     tel = lap.get_telemetry()
 
     ##############################################################################
@@ -54,13 +51,11 @@ def get_gearshifts_visualization(gp, session, year, lap, driver):
     cbar.set_ticks(np.arange(1.5, 9.5))
     cbar.set_ticklabels(np.arange(1, 9))
 
-    # plt.show()
-
     imgdata = io.StringIO()
     plt.savefig(imgdata, format='svg', transparent=True)
     imgdata.seek(0)  # rewind the data
 
     # svg_dta = imgdata.getvalue()  # this is svg data
-    plt.show()
+    # plt.show()
     return imgdata.getvalue()
     # print(svg_dta)
