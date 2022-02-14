@@ -1,5 +1,4 @@
 import os
-from pprint import pprint
 
 import fastf1 as ff1
 from fastf1 import plotting
@@ -8,14 +7,15 @@ from flask_cors import CORS
 from flask_restful import Api
 
 from resources.all_team_color import AllTeamColor
+from resources.all_telemetry import AllLapData
 from resources.car_image import CarImage
 from resources.circuit_image import CircuitImage
 from resources.circuit_infos import CircuitInfos
 from resources.constructors_standing import ConstructorsStanding
 from resources.current_schedule import CurrentSchedule
+from resources.distance_between_drivers import DistanceBetweenDrivers
 from resources.driver_image import DriverImage
 from resources.drivers_standing import DriversStanding
-from resources.fastest_compound import FastestCompound
 from resources.gearshifts_on_lap import GearShiftsOnLap
 from resources.get_tweets import GetTweets
 from resources.session_results import SessionResults
@@ -57,12 +57,10 @@ api.add_resource(GetTweets, '/api/get-tweets',
 api.add_resource(TeamColor, '/api/team-colors/<team_id>', endpoint="team-color")
 api.add_resource(AllTeamColor, '/api/team-colors', endpoint="all-team-color")
 api.add_resource(CircuitInfos, '/api/circuit/<circuit_id>', endpoint="circuit-infos")
-api.add_resource(FastestCompound, '/api/fastest-compound/<lap>/<gp>/<session>/<year>', endpoint="fastest-compound")
+api.add_resource(DistanceBetweenDrivers, '/api/distance-between-drivers/<gp>/<session>/<year>/<driver1>/<driver2>',
+                 endpoint="distance-between-drivers")
+api.add_resource(AllLapData, '/api/all-lap-data/<gp>/<session>/<year>',
+                 endpoint="all-lap-data")
 
 if __name__ == "__main__":
-    race = ff1.get_session(2021, 'Abu Dhabi', 'R')
-    laps = race.load_laps(with_telemetry=True)
-
-    pprint(laps['Compound'].value_counts())
-
     app.run(debug=True)
