@@ -6,8 +6,8 @@ team_color_codes = {
     },
     "mercedes": {
         "primary": "#00D2BE",
-        "secondary": "#0d0d0d",
-        "tertiary": "#d9d8d6"
+        "secondary": "#A50003",
+        "tertiary": "#4B4B4B"
     },
     "ferrari": {
         "primary": "#f60100",

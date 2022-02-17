@@ -39,7 +39,7 @@ def get_current_constructors_standing():
     for d in data:
         id = d['Constructor']['constructorId']
         d['color'] = team_color_codes[id]
-        d['fullName'] = team_full_names[id]
+        d['nameExtended'] = team_full_names[id]
 
     return data
 
