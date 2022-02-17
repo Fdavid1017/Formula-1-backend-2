@@ -8,5 +8,5 @@ team_full_names = {
     "alpine": "$team F1 Team",
     "alfa": "$team F1 Team ORLEN",
     "haas": "Uralkali $team F1 Team",
-    "williams": "Williams Racing",
+    "williams": "$team Racing",
 }
