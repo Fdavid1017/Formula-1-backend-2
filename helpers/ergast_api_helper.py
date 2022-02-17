@@ -4,6 +4,7 @@ from exceptions.api_request_exception import ApiRequestException
 from helpers.circuits.circuits import get_circuit
 from helpers.load_json import load_json
 from helpers.team_color_codes import team_color_codes
+from helpers.team_full_names import team_full_names
 
 season = 'current'
 
@@ -38,6 +39,7 @@ def get_current_constructors_standing():
     for d in data:
         id = d['Constructor']['constructorId']
         d['color'] = team_color_codes[id]
+        d['fullName'] = team_full_names[id]
 
     return data
 
