@@ -67,6 +67,9 @@ def get_constructor_details(id):
 
     for driver in drivers:
         if constructor['Constructor']['constructorId'] == driver['Constructors'][0]['constructorId']:
-            constructor['drivers'].append(driver['Driver']['driverId'])
+            constructor['drivers'].append({
+                'id': driver['Driver']['driverId'],
+                'code': driver['Driver']['code']
+            })
 
     return constructor
