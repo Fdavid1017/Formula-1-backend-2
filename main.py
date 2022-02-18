@@ -11,6 +11,7 @@ from resources.all_telemetry import AllLapData
 from resources.car_image import CarImage
 from resources.circuit_image import CircuitImage
 from resources.circuit_infos import CircuitInfos
+from resources.constructor_details import ConstructorDetails
 from resources.constructors_standing import ConstructorsStanding
 from resources.current_schedule import CurrentSchedule
 from resources.distance_between_drivers import DistanceBetweenDrivers
@@ -46,6 +47,7 @@ api.add_resource(DriverImage, '/api/driver-image/<image_name>', endpoint="driver
 api.add_resource(CarImage, '/api/car-image/<image_name>', endpoint="car-image")
 api.add_resource(UpcomingRace, '/api/upcoming-race', endpoint="upcoming-race")
 api.add_resource(ConstructorsStanding, '/api/constructors-standing', endpoint="constructors-standing")
+api.add_resource(ConstructorDetails, '/api/constructor/<id>', endpoint="constructor-details")
 api.add_resource(DriversStanding, '/api/drivers-standing', endpoint="drivers-standing")
 api.add_resource(SessionResults, '/api/session-results/<gp>/<session>/<year>', endpoint="session-results-with-year")
 api.add_resource(GearShiftsOnLap, '/api/gear-shifts-on-lap/<lap>/<driver>/<gp>/<session>/<year>',
