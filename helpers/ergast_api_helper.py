@@ -50,12 +50,17 @@ def get_current_drivers_standing():
     if response.status_code != 200:
         raise ApiRequestException(f'Api responded with status code {response.status_code}')
 
-    return response.json()['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
+    drivers = response.json()['MRData']['StandingsTable']['StandingsLists'][0]['DriverStandings']
+
+    for d in drivers:
+        d['Constructors'] = d['Constructors'][0]
+        d['Constructors'] = get_constructor_details(d['Constructors']['constructorId'], True)
+
+    return drivers
 
 
-def get_constructor_details(id):
+def get_constructor_details(id, ignore_drivers=False):
     constructors = get_current_constructors_standing()
-    drivers = get_current_drivers_standing()
 
     constructor = None
 
@@ -69,11 +74,13 @@ def get_constructor_details(id):
 
     constructor['drivers'] = []
 
-    for driver in drivers:
-        if constructor['Constructor']['constructorId'] == driver['Constructors'][0]['constructorId']:
-            constructor['drivers'].append({
-                'id': driver['Driver']['driverId'],
-                'code': driver['Driver']['code']
-            })
+    if not ignore_drivers:
+        drivers = get_current_drivers_standing()
+        for driver in drivers:
+            if constructor['Constructor']['constructorId'] == driver['Constructors'][0]['constructorId']:
+                constructor['drivers'].append({
+                    'id': driver['Driver']['driverId'],
+                    'code': driver['Driver']['code']
+                })
 
     return constructor
