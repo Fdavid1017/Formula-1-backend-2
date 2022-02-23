@@ -59,13 +59,13 @@ def get_constructor_details(id):
 
     constructor = None
 
-    if constructor is None:
-        raise NotFoundException('Constructor not found with the id of ' + id)
-
     for c in constructors:
         if c['Constructor']['constructorId'] == id:
             constructor = c
             break
+
+    if constructor is None:
+        raise NotFoundException('Constructor not found with the id of ' + id)
 
     constructor['drivers'] = []
 
