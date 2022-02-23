@@ -1,6 +1,7 @@
 import requests
 
 from exceptions.api_request_exception import ApiRequestException
+from exceptions.not_found_exception import NotFoundException
 from helpers.circuits.circuits import get_circuit
 from helpers.load_json import load_json
 from helpers.team_color_codes import team_color_codes
@@ -57,6 +58,9 @@ def get_constructor_details(id):
     drivers = get_current_drivers_standing()
 
     constructor = None
+
+    if constructor is None:
+        raise NotFoundException('Constructor not found with the id of ' + id)
 
     for c in constructors:
         if c['Constructor']['constructorId'] == id:
