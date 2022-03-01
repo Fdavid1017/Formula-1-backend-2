@@ -77,10 +77,25 @@ def get_constructor_details(id, ignore_drivers=False):
     if not ignore_drivers:
         drivers = get_current_drivers_standing()
         for driver in drivers:
-            if constructor['Constructor']['constructorId'] == driver['Constructors'][0]['constructorId']:
+            if constructor['Constructor']['constructorId'] == driver['Constructors']['Constructor']['constructorId']:
                 constructor['drivers'].append({
                     'id': driver['Driver']['driverId'],
                     'code': driver['Driver']['code']
                 })
 
     return constructor
+
+
+def get_driver_details(id):
+    drivers = get_current_drivers_standing()
+    driver = None
+
+    for d in drivers:
+        if d['Driver']['driverId'] == id:
+            driver = d
+            break
+
+    if driver is None:
+        raise NotFoundException('Driver not found with the id of ' + id)
+
+    return driver

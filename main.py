@@ -15,6 +15,7 @@ from resources.constructor_details import ConstructorDetails
 from resources.constructors_standing import ConstructorsStanding
 from resources.current_schedule import CurrentSchedule
 from resources.distance_between_drivers import DistanceBetweenDrivers
+from resources.driver_details import DriverDetails
 from resources.driver_image import DriverImage
 from resources.drivers_standing import DriversStanding
 from resources.gearshifts_on_lap import GearShiftsOnLap
@@ -49,6 +50,7 @@ api.add_resource(UpcomingRace, '/api/upcoming-race', endpoint="upcoming-race")
 api.add_resource(ConstructorsStanding, '/api/constructors-standing', endpoint="constructors-standing")
 api.add_resource(ConstructorDetails, '/api/constructor/<id>', endpoint="constructor-details")
 api.add_resource(DriversStanding, '/api/drivers-standing', endpoint="drivers-standing")
+api.add_resource(DriverDetails, '/api/driver/<id>', endpoint="driver-details")
 api.add_resource(SessionResults, '/api/session-results/<gp>/<session>/<year>', endpoint="session-results-with-year")
 api.add_resource(GearShiftsOnLap, '/api/gear-shifts-on-lap/<lap>/<driver>/<gp>/<session>/<year>',
                  endpoint="gear-shits-on-lap")
