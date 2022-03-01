@@ -30,6 +30,19 @@ def get_current_schedule(expand={}):
     return result
 
 
+def get_schedule_by_round(round):
+    schedules = get_current_schedule({
+        'infos': True,
+        'map': True
+    })
+
+    for schedule in schedules:
+        if (int(schedule['round']) == int(round)):
+            return schedule
+
+    raise NotFoundException('No scheduled weekend found with the round of ' + round)
+
+
 def get_current_constructors_standing():
     response = requests.get(f'https://ergast.com/api/f1/{season}/constructorStandings.json')
     if response.status_code != 200:

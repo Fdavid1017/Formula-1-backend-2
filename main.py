@@ -20,6 +20,7 @@ from resources.driver_image import DriverImage
 from resources.drivers_standing import DriversStanding
 from resources.gearshifts_on_lap import GearShiftsOnLap
 from resources.get_tweets import GetTweets
+from resources.scedule_infos import ScheduleInfos
 from resources.session_results import SessionResults
 from resources.speed_on_lap import SpeedOnLap
 from resources.team_color import TeamColor
@@ -43,6 +44,7 @@ cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 api = Api(app)
 
 api.add_resource(CurrentSchedule, '/api/current-schedule', endpoint="current-schedule")
+api.add_resource(ScheduleInfos, '/api/schedule/<round>', endpoint="schedule-round")
 api.add_resource(CircuitImage, '/api/circuit-image/<image_name>', endpoint="circuit-image")
 api.add_resource(DriverImage, '/api/driver-image/<image_name>', endpoint="driver-image")
 api.add_resource(CarImage, '/api/car-image/<image_name>', endpoint="car-image")
