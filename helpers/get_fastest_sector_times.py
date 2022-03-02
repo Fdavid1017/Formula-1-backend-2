@@ -1,5 +1,4 @@
 import json
-from pprint import pprint
 
 import fastf1 as ff1
 
@@ -26,15 +25,18 @@ def get_fastest_sector_times(gp, session, year):
     return {
         "sector1": {
             'driver': key1,
-            'time': fastest_sector1_json['Sector1Time'][key1] / 1000
+            'time': fastest_sector1_json['Sector1Time'][key1] / 1000,
+            'sessionName': session
         },
         "sector2": {
             'driver': key2,
-            'time': fastest_sector2_json['Sector2Time'][key2] / 1000
+            'time': fastest_sector2_json['Sector2Time'][key2] / 1000,
+            'sessionName': session
         },
         "sector3": {
             'driver': key3,
-            'time': fastest_sector3_json['Sector3Time'][key3] / 1000
+            'time': fastest_sector3_json['Sector3Time'][key3] / 1000,
+            'sessionName': session
         }
 
     }
