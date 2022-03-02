@@ -6,6 +6,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
 
+from resources import cache
 from resources.all_team_color import AllTeamColor
 from resources.all_telemetry import AllLapData
 from resources.car_image import CarImage
@@ -18,6 +19,7 @@ from resources.distance_between_drivers import DistanceBetweenDrivers
 from resources.driver_details import DriverDetails
 from resources.driver_image import DriverImage
 from resources.drivers_standing import DriversStanding
+from resources.fastest_sector_times import FastestSectorTimesWeekend
 from resources.gearshifts_on_lap import GearShiftsOnLap
 from resources.get_tweets import GetTweets
 from resources.scedule_infos import ScheduleInfos
@@ -42,6 +44,7 @@ app.config['JSON_AS_ASCII'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 api = Api(app)
+cache.init_app(app)
 
 api.add_resource(CurrentSchedule, '/api/current-schedule', endpoint="current-schedule")
 api.add_resource(ScheduleInfos, '/api/schedule/<round>', endpoint="schedule-round")
@@ -54,6 +57,8 @@ api.add_resource(ConstructorDetails, '/api/constructor/<id>', endpoint="construc
 api.add_resource(DriversStanding, '/api/drivers-standing', endpoint="drivers-standing")
 api.add_resource(DriverDetails, '/api/driver/<id>', endpoint="driver-details")
 api.add_resource(SessionResults, '/api/session-results/<gp>/<session>/<year>', endpoint="session-results-with-year")
+api.add_resource(FastestSectorTimesWeekend, '/api/weekend-sector-times/<gp>/<year>',
+                 endpoint="fastest-sector-times-in-weekend")
 api.add_resource(GearShiftsOnLap, '/api/gear-shifts-on-lap/<lap>/<driver>/<gp>/<session>/<year>',
                  endpoint="gear-shits-on-lap")
 api.add_resource(SpeedOnLap, '/api/speed-on-lap/<lap>/<driver>/<gp>/<session>/<year>',

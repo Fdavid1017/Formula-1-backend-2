@@ -23,9 +23,6 @@ def get_current_schedule(expand={}):
             circuit_details = get_circuit(circuit['Circuit']['circuitId'])
 
             circuit['Circuit']['details'] = circuit_details
-            if 'map' in expand and expand['map']:
-                circuit['Circuit']['details']['map'] = load_json(
-                    f'helpers/circuits/gjson_data/{circuit_details["gjson_map"]}')
 
     return result
 
