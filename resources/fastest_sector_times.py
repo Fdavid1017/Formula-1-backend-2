@@ -6,7 +6,7 @@ from . import cache
 
 
 class FastestSectorTimesWeekend(Resource):
-    @cache.cached()
+    @cache.cached(timeout=None)
     def get(self, gp, year):
         # get_fastest_sector_times_weekend(gp, year)
         # return None
