@@ -1,12 +1,12 @@
 team_color_codes = {
     "red_bull": {
         "primary": "#12142d",
-        "secondary": "#CEB735",
+        "secondary": "#ceb735",
         "tertiary": "#ff0126"
     },
     "mercedes": {
-        "primary": "#00D2BE",
-        "secondary": "#A50003",
+        "primary": "#00d2be",
+        "secondary": "#a50003",
         "tertiary": "#babbb9"
     },
     "ferrari": {

@@ -11,7 +11,6 @@ def get_session_results(gp, session, year=2021):
     # First, we need to get an array of all drivers.
 
     drivers = pd.unique(laps['Driver'])
-    print(drivers)
 
     ##############################################################################
     # After that we'll get each drivers fastest lap, create a new laps object
@@ -56,4 +55,4 @@ def get_session_results(gp, session, year=2021):
         "Driver",
         "TrackStatus",
         "LapTimeDelta"
-    ]].to_json()
+    ]]
