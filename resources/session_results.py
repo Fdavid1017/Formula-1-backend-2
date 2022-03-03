@@ -10,7 +10,6 @@ from helpers.handle_endpoint_exception import handle_endpoint_exception
 class SessionResults(Resource):
     def get(self, gp, session, year):
         try:
-            pprint(get_session_results(gp, session, year))
             return json.loads(get_session_results(gp, session, year).to_json())
         except Exception as e:
             return handle_endpoint_exception(str(e), 500)

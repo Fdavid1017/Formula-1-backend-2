@@ -4,8 +4,8 @@ from fastf1.core import Laps
 
 
 def get_session_results(gp, session, year=2021):
-    quali = fastf1.get_session(year, gp, session)
-    laps = quali.load_laps()
+    session = fastf1.get_session(year, gp, session)
+    laps = session.load_laps()
 
     ##############################################################################
     # First, we need to get an array of all drivers.
@@ -31,6 +31,19 @@ def get_session_results(gp, session, year=2021):
     pole_lap = fastest_laps.pick_fastest()
     fastest_laps['LapTimeDelta'] = fastest_laps['LapTime'] - pole_lap['LapTime']
 
+    driver_full_names = []
+    driver_ids = []
+    colors = []
+    for index, row in fastest_laps.iterrows():
+        driver = session.get_driver(row['Driver'])
+        driver_full_names.append(f'{driver.name} {driver.familyname}')
+        driver_ids.append(driver.info['Driver']['driverId'])
+        colors.append(fastf1.plotting.team_color(row['Team']))
+
+    fastest_laps['DriverFullName'] = driver_full_names
+    fastest_laps['DriverId'] = driver_ids
+    fastest_laps['Color'] = colors
+
     return fastest_laps[[
         "Time",
         "DriverNumber",
@@ -54,5 +67,8 @@ def get_session_results(gp, session, year=2021):
         "Team",
         "Driver",
         "TrackStatus",
-        "LapTimeDelta"
+        "LapTimeDelta",
+        "DriverFullName",
+        "DriverId",
+        "Color"
     ]]
