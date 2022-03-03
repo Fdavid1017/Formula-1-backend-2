@@ -7,17 +7,17 @@ team_color_codes = {
     "mercedes": {
         "primary": "#00D2BE",
         "secondary": "#A50003",
-        "tertiary": "#4B4B4B"
+        "tertiary": "#babbb9"
     },
     "ferrari": {
         "primary": "#f60100",
         "secondary": "#f7d31d",
-        "tertiary": "#00954d"
+        "tertiary": "#130f10"
     },
     "mclaren": {
         "primary": "#ff9700",
-        "secondary": "#0060db",
-        "tertiary": "#050505"
+        "secondary": "#62c0e5",
+        "tertiary": "#252629"
     },
     "alphatauri": {
         "primary": "#0a2840",
@@ -26,27 +26,27 @@ team_color_codes = {
     },
     "aston_martin": {
         "primary": "#265b55",
-        "secondary": "#DBE33B",
-        "tertiary": "#f30960"
+        "secondary": "#121418",
+        "tertiary": "#bdd50e"
     },
     "alpine": {
         "primary": "#1672b1",
-        "secondary": "#9c1814",
-        "tertiary": "#b5b5b5"
+        "secondary": "#dba9d6",
+        "tertiary": "#f40006"
     },
     "alfa": {
         "primary": "#8b0125",
-        "secondary": "#be2051",
+        "secondary": "#792f42",
         "tertiary": "#6d7580"
     },
     "haas": {
         "primary": "#0c4280",
         "secondary": "#cb2f32",
-        "tertiary": "#e0e0e0"
+        "tertiary": "#dedddd"
     },
     "williams": {
         "primary": "#177aa4",
-        "secondary": "#040f21",
-        "tertiary": "#e3e3e3"
+        "secondary": "#13202a",
+        "tertiary": "#33b2cd"
     }
 }
