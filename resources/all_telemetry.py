@@ -1,4 +1,5 @@
-from flask import jsonify
+import json
+
 from flask_restful import Resource
 
 from helpers.get_all_telemetry import get_all_lap_data
@@ -6,4 +7,4 @@ from helpers.get_all_telemetry import get_all_lap_data
 
 class AllLapData(Resource):
     def get(self, year, gp, session):
-        return jsonify(get_all_lap_data(year, gp, session).to_json())
+        return get_all_lap_data(year, gp, session)
