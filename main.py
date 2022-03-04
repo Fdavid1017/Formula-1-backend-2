@@ -22,6 +22,7 @@ from resources.drivers_standing import DriversStanding
 from resources.fastest_sector_times import FastestSectorTimesWeekend
 from resources.gearshifts_on_lap import GearShiftsOnLap
 from resources.get_tweets import GetTweets
+from resources.race_results import RaceResult
 from resources.scedule_infos import ScheduleInfos
 from resources.session_results import SessionResults
 from resources.speed_on_lap import SpeedOnLap
@@ -57,6 +58,7 @@ api.add_resource(ConstructorDetails, '/api/constructor/<id>', endpoint="construc
 api.add_resource(DriversStanding, '/api/drivers-standing', endpoint="drivers-standing")
 api.add_resource(DriverDetails, '/api/driver/<id>', endpoint="driver-details")
 api.add_resource(SessionResults, '/api/session-results/<gp>/<session>/<year>', endpoint="session-results-with-year")
+api.add_resource(RaceResult, '/api/race-results/<round>/<year>', endpoint="race-results-with-year")
 api.add_resource(FastestSectorTimesWeekend, '/api/weekend-sector-times/<gp>/<year>',
                  endpoint="fastest-sector-times-in-weekend")
 api.add_resource(GearShiftsOnLap, '/api/gear-shifts-on-lap/<lap>/<driver>/<gp>/<session>/<year>',

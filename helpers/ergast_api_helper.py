@@ -3,7 +3,6 @@ import requests
 from exceptions.api_request_exception import ApiRequestException
 from exceptions.not_found_exception import NotFoundException
 from helpers.circuits.circuits import get_circuit
-from helpers.load_json import load_json
 from helpers.team_color_codes import team_color_codes
 from helpers.team_full_names import team_full_names
 
@@ -109,3 +108,18 @@ def get_driver_details(id):
         raise NotFoundException('Driver not found with the id of ' + id)
 
     return driver
+
+
+def get_race_result(round, year):
+    response = requests.get(f'http://ergast.com/api/f1/{year}/{round}/results.json')
+
+    if response.status_code != 200:
+        raise ApiRequestException(f'Api responded with status code {response.status_code}')
+
+    result = response.json()['MRData']['RaceTable']['Races'][0]['Results']
+
+    for i in range(len(result)):
+        del(result[i]['Constructor'])
+        result[i]['Driver'] = get_driver_details(result[i]['Driver']['driverId'])
+
+    return result
