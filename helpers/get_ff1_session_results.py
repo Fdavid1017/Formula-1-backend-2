@@ -19,8 +19,13 @@ def get_session_results(gp, session, year=2021):
 
     list_fastest_laps = list()
     for drv in drivers:
-        drvs_fastest_lap = laps.pick_driver(drv).pick_fastest()
-        list_fastest_laps.append(drvs_fastest_lap)
+        if type(drv) is str:
+            try:
+                drvs_fastest_lap = laps.pick_driver(drv).pick_fastest()
+                list_fastest_laps.append(drvs_fastest_lap)
+            except Exception:
+                list_fastest_laps.append(laps.pick_driver(drv).iloc[0])
+
     fastest_laps = Laps(list_fastest_laps).sort_values(by='LapTime').reset_index(drop=True)
 
     ##############################################################################
