@@ -29,11 +29,6 @@ def get_all_lap_data(year, gp, session, fields=None, lap=None):
                 driver_laps['DriverId'] = driver_ids
                 driver_laps['Color'] = colors
 
-                # driver_laps = driver_laps[
-                #     ['LapTime', 'DriverNumber', 'Stint', 'Sector1Time', 'Sector2Time', 'Sector3Time', 'SpeedI1',
-                #      'SpeedI2',
-                #      'SpeedFL', 'SpeedST', 'TyreLife', 'LapStartTime', 'Driver']
-                # ]
                 driver_laps = driver_laps[[
                     "Time",
                     "DriverNumber",

@@ -7,6 +7,7 @@ from flask_cors import CORS
 from flask_restful import Api
 
 from resources import cache
+from resources.all_car_data import AllCarData
 from resources.all_team_color import AllTeamColor
 from resources.all_telemetry import AllLapData
 from resources.car_image import CarImage
@@ -74,6 +75,8 @@ api.add_resource(DistanceBetweenDrivers, '/api/distance-between-drivers/<gp>/<se
                  endpoint="distance-between-drivers")
 api.add_resource(AllLapData, '/api/all-lap-data/<gp>/<session>/<year>',
                  endpoint="all-lap-data")
+api.add_resource(AllCarData, '/api/all-car-data/<gp>/<session>/<year>/<lap>',
+                 endpoint="all-car-data")
 
 if __name__ == "__main__":
     app.run(debug=True)
