@@ -22,6 +22,7 @@ def get_all_car_data(year, gp, session, lap):
                 full_name = f'{driver.name} {driver.familyname}'
                 driver_id = driver.info['Driver']['driverId']
                 color = fastf1.plotting.team_color(driver.team)
+                team = driver.team
                 telemetry = driver_lap.telemetry
 
                 telemetry = telemetry[[
@@ -38,6 +39,7 @@ def get_all_car_data(year, gp, session, lap):
                     'fullName': full_name,
                     'driverId': driver_id,
                     'color': color,
+                    'team': team,
                     'carData': json.loads(telemetry.to_json()),
                 })
             except Exception as e:
