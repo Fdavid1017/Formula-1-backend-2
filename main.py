@@ -23,6 +23,7 @@ from resources.drivers_standing import DriversStanding
 from resources.fastest_sector_times import FastestSectorTimesWeekend
 from resources.gearshifts_on_lap import GearShiftsOnLap
 from resources.get_tweets import GetTweets
+from resources.max_laps_in_session import MaxLapsInSession
 from resources.race_results import RaceResult
 from resources.scedule_infos import ScheduleInfos
 from resources.session_results import SessionResults
@@ -77,6 +78,8 @@ api.add_resource(AllLapData, '/api/all-lap-data/<gp>/<session>/<year>',
                  endpoint="all-lap-data")
 api.add_resource(AllCarData, '/api/all-car-data/<gp>/<session>/<year>/<lap>',
                  endpoint="all-car-data")
+api.add_resource(MaxLapsInSession, '/api/max-laps-in-session/<gp>/<session>/<year>',
+                 endpoint="max-laps-in-session")
 
 if __name__ == "__main__":
     app.run(debug=True)
