@@ -1,4 +1,4 @@
-import io
+from io import BytesIO
 
 import fastf1 as fastf1
 import matplotlib as mpl
@@ -56,8 +56,7 @@ def get_speed_visualization(gp, session, year, lap, driver):
     normlegend = mpl.colors.Normalize(vmin=color.min(), vmax=color.max())
     legend = mpl.colorbar.ColorbarBase(cbaxes, norm=normlegend, cmap=colormap, orientation="horizontal")
 
-    imgdata = io.StringIO()
-    plt.savefig(imgdata, format='svg', transparent=True)
-    imgdata.seek(0)  # rewind the data
-    plt.show()
-    return imgdata.getvalue()
+    figfile = BytesIO()
+    plt.savefig(figfile, format='png', transparent=True)
+    figfile.seek(0)
+    return figfile
