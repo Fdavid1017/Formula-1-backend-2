@@ -5,7 +5,6 @@ from fastf1 import plotting
 from flask import Flask
 from flask_cors import CORS
 from flask_restful import Api
-
 from resources import cache
 from resources.all_car_data import AllCarData
 from resources.all_team_color import AllTeamColor
@@ -26,6 +25,7 @@ from resources.get_tweets import GetTweets
 from resources.max_laps_in_session import MaxLapsInSession
 from resources.race_results import RaceResult
 from resources.scedule_infos import ScheduleInfos
+from resources.session_drivers import SessionDrivers
 from resources.session_results import SessionResults
 from resources.speed_on_lap import SpeedOnLap
 from resources.team_color import TeamColor
@@ -77,9 +77,13 @@ api.add_resource(DistanceBetweenDrivers, '/api/distance-between-drivers/<gp>/<se
 api.add_resource(AllLapData, '/api/all-lap-data/<gp>/<session>/<year>',
                  endpoint="all-lap-data")
 api.add_resource(AllCarData, '/api/all-car-data/<gp>/<session>/<year>/<lap>',
-                 endpoint="all-car-data")
+                 endpoint="all-car-data", defaults={'drivers_to_search': []})
+api.add_resource(AllCarData, '/api/all-car-data/<gp>/<session>/<year>/<lap>/<drivers_to_search>',
+                 endpoint="all-car-data-filtered")
 api.add_resource(MaxLapsInSession, '/api/max-laps-in-session/<gp>/<session>/<year>',
                  endpoint="max-laps-in-session")
+api.add_resource(SessionDrivers, '/api/session-drivers/<gp>/<session>/<year>',
+                 endpoint="session-drivers")
 
 if __name__ == "__main__":
     app.run(debug=True)

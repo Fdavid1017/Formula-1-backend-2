@@ -5,14 +5,22 @@ import fastf1 as ff1
 import pandas as pd
 
 
-def get_all_car_data(year, gp, session, lap):
+def get_all_car_data(year, gp, session, lap, drivers_to_search=[]):
     session = ff1.get_session(year, gp, session)
     laps = session.load_laps(with_telemetry=True)
 
     drivers = pd.unique(laps['Driver'])
+    drivers_list = []
     driver_laps_list = list()
 
-    for drv in drivers:
+    if drivers_to_search == []:
+        drivers_list = drivers
+    else:
+        for drv in drivers_to_search:
+            if drv in drivers:
+                drivers_list.append(drv)
+
+    for drv in drivers_list:
         if type(drv) is str:
             try:
                 driver_laps = laps.pick_driver(drv)
@@ -23,7 +31,7 @@ def get_all_car_data(year, gp, session, lap):
                 driver_id = driver.info['Driver']['driverId']
                 color = fastf1.plotting.team_color(driver.team)
                 team = driver.team
-                telemetry = driver_lap.telemetry
+                telemetry = driver_lap.get_car_data().add_distance()
 
                 telemetry = telemetry[[
                     'SessionTime',
@@ -33,6 +41,7 @@ def get_all_car_data(year, gp, session, lap):
                     'Throttle',
                     'Brake',
                     'DRS',
+                    'Distance',
                 ]]
 
                 driver_laps_list.append({
