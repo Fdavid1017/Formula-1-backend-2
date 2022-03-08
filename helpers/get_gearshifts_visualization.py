@@ -1,4 +1,4 @@
-import io
+from io import BytesIO
 
 import fastf1
 import matplotlib.pyplot as plt
@@ -39,6 +39,7 @@ def get_gearshifts_visualization(gp, session, year, lap, driver):
     ##############################################################################
     # Create the plot
 
+    plt.figure(facecolor='white')
     plt.gca().add_collection(lc_comp)
     plt.axis('equal')
     plt.tick_params(labelleft=False, left=False, labelbottom=False, bottom=False)
@@ -49,13 +50,10 @@ def get_gearshifts_visualization(gp, session, year, lap, driver):
 
     cbar = plt.colorbar(mappable=lc_comp, label="Gear", boundaries=np.arange(1, 10))
     cbar.set_ticks(np.arange(1.5, 9.5))
-    cbar.set_ticklabels(np.arange(1, 9))
+    cbar.set_ticklabels(np.arange(1, 9), color="black")
+    cbar.set_label('Gear', color="black")
 
-    imgdata = io.StringIO()
-    plt.savefig(imgdata, format='svg', transparent=True)
-    imgdata.seek(0)  # rewind the data
-
-    # svg_dta = imgdata.getvalue()  # this is svg data
-    # plt.show()
-    return imgdata.getvalue()
-    # print(svg_dta)
+    figfile = BytesIO()
+    plt.savefig(figfile, format='png', transparent=True)
+    figfile.seek(0)
+    return figfile
