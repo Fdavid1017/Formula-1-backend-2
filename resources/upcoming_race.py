@@ -10,28 +10,12 @@ class UpcomingRace(Resource):
     def get(self):
         schedule = get_current_schedule()
         today = datetime.datetime.now()
-        year, month, day = schedule[0]['date'].split('-')
-        date = datetime.datetime(int(year), int(month), int(day))
 
-        diff = date - today
-        closest = {
-            'race': schedule[0],
-            'date': date,
-            'diff': diff
-        }
-        for i in range(1, len(schedule)):
-            race = schedule[i]
-            year, month, day = race['date'].split('-')
+        for i in range(len(schedule)):
+            year, month, day = schedule[i]['date'].split('-')
             date = datetime.datetime(int(year), int(month), int(day))
-            diff = date - today
-            if 0 < diff.days < closest['diff'].days:
-                closest = {
-                    'race': race,
-                    'date': date,
-                    'diff': diff
-                }
 
-            if diff.days > closest['diff'].days:
-                return jsonify(closest['race'])
+            if (date - today).total_seconds() > 0:
+                return jsonify(schedule[i])
 
-        return
+        return schedule[len(schedule) - 1]
