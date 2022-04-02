@@ -5,7 +5,7 @@ import fastf1 as ff1
 import pandas as pd
 
 
-def get_all_lap_data(year, gp, session, fields=None, lap=None):
+def get_all_lap_data(year, gp, session):
     session = ff1.get_session(year, gp, session)
     laps = session.load_laps(with_telemetry=True)
 

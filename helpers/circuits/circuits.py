@@ -1,5 +1,3 @@
-from exceptions.not_found_exception import NotFoundException
-
 circuits = {
     'bahrain': {
         "circuit_id": "bahrain",
@@ -293,9 +291,13 @@ circuits = {
 
 
 def get_circuit(id):
-    circuit = circuits[id]
+    circuit = None
+    try:
+        circuit = circuits[id]
+    except Exception as e:
+        print(e)
 
-    if circuit is None:
-        raise NotFoundException(f'No circuit found with the id of {id}')
+    # if circuit is None:
+    #     raise NotFoundException(f'No circuit found with the id of {id}')
 
     return circuit

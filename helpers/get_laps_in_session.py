@@ -1,5 +1,3 @@
-from pprint import pprint
-
 import fastf1 as ff1
 from fastf1.core import Laps
 

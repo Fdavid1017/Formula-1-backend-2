@@ -5,7 +5,9 @@ import fastf1 as ff1
 import pandas as pd
 
 
-def get_all_car_data(year, gp, session, lap, drivers_to_search=[]):
+def get_all_car_data(year, gp, session, lap, drivers_to_search=None):
+    if drivers_to_search is None:
+        drivers_to_search = []
     session = ff1.get_session(year, gp, session)
     laps = session.load_laps(with_telemetry=True)
 
@@ -13,7 +15,7 @@ def get_all_car_data(year, gp, session, lap, drivers_to_search=[]):
     drivers_list = []
     driver_laps_list = list()
 
-    if drivers_to_search == []:
+    if not drivers_to_search:
         drivers_list = drivers
     else:
         for drv in drivers_to_search:

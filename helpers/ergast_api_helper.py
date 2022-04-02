@@ -1,3 +1,5 @@
+from pprint import pprint
+
 import requests
 
 from exceptions.api_request_exception import ApiRequestException
@@ -9,7 +11,9 @@ from helpers.team_full_names import team_full_names
 season = 'current'
 
 
-def get_current_schedule(expand={}):
+def get_current_schedule(expand=None):
+    if expand is None:
+        expand = {}
     response = requests.get(f'https://ergast.com/api/f1/{season}.json')
 
     if response.status_code != 200:
@@ -31,9 +35,10 @@ def get_schedule_by_round(round):
         'infos': True,
         'map': True
     })
-
+    pprint(schedules)
     for schedule in schedules:
-        if (int(schedule['round']) == int(round)):
+        pprint(schedule)
+        if int(schedule['round']) == int(round):
             return schedule
 
     raise NotFoundException('No scheduled weekend found with the round of ' + round)
@@ -111,7 +116,7 @@ def get_driver_details(id):
 
 
 def get_race_result(round, year):
-    response = requests.get(f'http://ergast.com/api/f1/{year}/{round}/results.json')
+    response = requests.get(f'https://ergast.com/api/f1/{year}/{round}/results.json')
 
     if response.status_code != 200:
         raise ApiRequestException(f'Api responded with status code {response.status_code}')
@@ -119,7 +124,7 @@ def get_race_result(round, year):
     result = response.json()['MRData']['RaceTable']['Races'][0]['Results']
 
     for i in range(len(result)):
-        del(result[i]['Constructor'])
+        del (result[i]['Constructor'])
         result[i]['Driver'] = get_driver_details(result[i]['Driver']['driverId'])
 
     return result
