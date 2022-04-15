@@ -35,9 +35,8 @@ def get_schedule_by_round(round):
         'infos': True,
         'map': True
     })
-    pprint(schedules)
+
     for schedule in schedules:
-        pprint(schedule)
         if int(schedule['round']) == int(round):
             return schedule
 

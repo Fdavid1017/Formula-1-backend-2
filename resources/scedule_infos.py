@@ -9,7 +9,6 @@ from helpers.handle_endpoint_exception import handle_endpoint_exception
 
 class ScheduleInfos(Resource):
     def get(self, round):
-        print('lul')
         try:
             return jsonify(get_schedule_by_round(round))
         except ApiRequestException as e:

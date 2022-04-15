@@ -295,9 +295,6 @@ def get_circuit(id):
     try:
         circuit = circuits[id]
     except Exception as e:
-        print(e)
-
-    # if circuit is None:
-    #     raise NotFoundException(f'No circuit found with the id of {id}')
+        print(f'Error with {id}')
 
     return circuit

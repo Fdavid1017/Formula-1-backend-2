@@ -20,8 +20,6 @@ def get_session_drivers(gp, session, year):
             color = fastf1.plotting.team_color(driver.team)
             team = driver.team
 
-            print(driver.info)
-
             driver_list.append({
                 'fullName': full_name,
                 'driverId': driver_id,
@@ -31,5 +29,4 @@ def get_session_drivers(gp, session, year):
                 'code': code,
             })
 
-    print(driver_list)
     return driver_list
