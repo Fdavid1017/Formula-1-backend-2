@@ -22,6 +22,7 @@ from resources.scedule_infos import ScheduleInfos
 from resources.session_drivers import SessionDrivers
 from resources.session_results import SessionResults
 from resources.speed_on_lap import SpeedOnLap
+from resources.tyre_usage import TyreUsage
 from resources.upcoming_race import UpcomingRace
 
 plotting.setup_mpl()
@@ -64,10 +65,9 @@ api.add_resource(AllCarData, '/api/all-car-data/<gp>/<session>/<year>/<lap>',
                  endpoint="all-car-data", defaults={'drivers_to_search': []})
 api.add_resource(AllCarData, '/api/all-car-data/<gp>/<session>/<year>/<lap>/<drivers_to_search>',
                  endpoint="all-car-data-filtered")
-api.add_resource(MaxLapsInSession, '/api/max-laps-in-session/<gp>/<session>/<year>',
-                 endpoint="max-laps-in-session")
-api.add_resource(SessionDrivers, '/api/session-drivers/<gp>/<session>/<year>',
-                 endpoint="session-drivers")
+api.add_resource(MaxLapsInSession, '/api/max-laps-in-session/<gp>/<session>/<year>', endpoint="max-laps-in-session")
+api.add_resource(SessionDrivers, '/api/session-drivers/<gp>/<session>/<year>', endpoint="session-drivers")
+api.add_resource(TyreUsage, '/api/tyre-usage/<gp>/<session>/<year>', endpoint="tyre-usage")
 
 if __name__ == "__main__":
     app.run(debug=True)
